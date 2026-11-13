@@ -1,0 +1,37 @@
+name: Qualidade do catálogo
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # Problema: conferir só produção deixava avisos nas ferramentas de teste/lint.
+      # A auditoria completa verifica também essas dependências a cada atualização.
+      # Data: 2026-11-12. @author Carla Evelyn
+      - run: npm audit --audit-level=moderate
+      - run: npm run verify:template
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: testes-navegador
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

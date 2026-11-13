@@ -1,0 +1,16 @@
+{
+  "id": "site-vendas-base",
+  "name": "Sua Loja",
+  "description": "Catálogo online com produtos, novidades e atendimento personalizado.",
+  "tagline": "Produtos escolhidos com cuidado. Atendimento que faz a diferença.",
+  "eyebrow": "NOVIDADES • QUALIDADE • ATENDIMENTO",
+  "headline": "Boas escolhas começam aqui.",
+  "catalogTitle": "Encontre seu próximo favorito",
+  "footerTagline": "Seu catálogo, do seu jeito.",
+  "logo": "/brand/logo.svg",
+  "cover": "/brand/cover.svg",
+  "primaryColor": "#17634b",
+  "accentColor": "#b44121",
+  "locale": "pt-BR",
+  "currency": "BRL"
+}

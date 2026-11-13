@@ -1,0 +1,22 @@
+name: Relatar problema
+description: Informe uma falha reproduzível no modelo.
+labels: []
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Comportamento esperado e observado
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Como reproduzir
+      description: Inclua passos e ambiente, usando apenas dados fictícios.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências
+      description: Remova senhas, chaves, links de recuperação e dados de clientes antes de compartilhar.
