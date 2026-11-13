@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { CART_KEY } from "../../lib/cart";
 const mock = "http://127.0.0.1:54321";
 
 test.beforeEach(async ({ request }) => {
@@ -86,17 +87,22 @@ test("carrinho migra valores antigos e confere novos preços antes do WhatsApp",
   page,
   request,
 }) => {
-  await page.addInitScript(() =>
-    localStorage.setItem(
-      "site-vendas-base:cart:v1",
-      JSON.stringify([{ id: "p-1", flavor: "Opção A", quantity: 2, price: 1 }]),
-    ),
+  await page.addInitScript(
+    (key) =>
+      localStorage.setItem(
+        key,
+        JSON.stringify([
+          { id: "p-1", flavor: "Opção A", quantity: 2, price: 1 },
+        ]),
+      ),
+    CART_KEY,
   );
   await page.goto("/");
   await page.getByRole("button", { name: "Abrir carrinho" }).click();
   await expect(page.locator(".total")).toContainText("160,00");
-  const saved = await page.evaluate(() =>
-    JSON.parse(localStorage.getItem("site-vendas-base:cart:v1") || "[]"),
+  const saved = await page.evaluate(
+    (key) => JSON.parse(localStorage.getItem(key) || "[]"),
+    CART_KEY,
   );
   expect(saved).toEqual([{ id: "p-1", flavor: "Opção A", quantity: 2 }]);
   await request.post(`${mock}/__product`, { data: { promotional_price: 70 } });
@@ -120,8 +126,9 @@ test("JSON inválido não quebra catálogo e falhas não mostram produtos fictí
   page,
   request,
 }) => {
-  await page.addInitScript(() =>
-    localStorage.setItem("site-vendas-base:cart:v1", "{invalido"),
+  await page.addInitScript(
+    (key) => localStorage.setItem(key, "{invalido"),
+    CART_KEY,
   );
   await page.goto("/");
   await expect(
