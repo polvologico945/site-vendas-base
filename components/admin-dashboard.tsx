@@ -20,6 +20,7 @@ import { ImageGalleryUpload } from "@/components/admin/image-gallery-upload";
 import { galleryImages } from "@/lib/images/gallery";
 import site from "@/config/site.json";
 import { whatsappUrl } from "@/lib/contact";
+import { themeStyle } from "@/lib/theme";
 import { ProductEditor } from "@/components/admin/product-editor";
 import { TaxonomyEditor } from "@/components/admin/taxonomy-editor";
 import type {
@@ -519,7 +520,15 @@ export default function AdminDashboard() {
       : products.filter((p) => p.category_id === categoryFilter);
 
   return (
-    <main className="admin-shell">
+    <main
+      className="admin-shell"
+      style={
+        themeStyle(
+          settings?.primary_color || site.primaryColor,
+          settings?.accent_color || site.accentColor,
+        ) as React.CSSProperties
+      }
+    >
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <CatalogImage src={settings?.logo_url || site.logo} alt="" />

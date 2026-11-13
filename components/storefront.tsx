@@ -14,6 +14,7 @@ import { galleryImages } from "@/lib/images/gallery";
 import { HeroGallery } from "@/components/hero-gallery";
 import site from "@/config/site.json";
 import { whatsappUrl } from "@/lib/contact";
+import { themeStyle } from "@/lib/theme";
 import { Modal } from "@/components/modal";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -239,11 +240,12 @@ export default function Storefront() {
 
   return (
     <main
+      className="storefront"
       style={
-        {
-          "--primary": settings.primary_color,
-          "--accent": settings.accent_color,
-        } as React.CSSProperties
+        themeStyle(
+          settings.primary_color,
+          settings.accent_color,
+        ) as React.CSSProperties
       }
     >
       <a className="skip-link" href="#produtos">

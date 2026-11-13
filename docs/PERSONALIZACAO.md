@@ -34,9 +34,32 @@ define as informações visíveis do catálogo conectado.
 
 ## Identidade visual
 
+As cores escolhidas pelo assistente agora se aplicam ao cabeçalho, à capa,
+ao rodapé, aos filtros, ao carrinho, às galerias, ao painel e às telas de acesso.
+O tema em `lib/theme.ts` calcula texto claro/escuro por contraste. Se a principal
+for muito clara, as ações usam a cor de destaque quando ela tem contraste
+suficiente; caso contrário, recebem um tom escuro derivado da paleta. Assim,
+principal `#FFFFFF` e destaque `#D01B1B` produzem áreas brancas, texto preto e
+botões vermelhos, sem texto branco sobre branco. Estados de sucesso/erro mantêm
+cores próprias e rótulos explicativos.
+
+Na prévia sem backend, o JSON é a fonte das cores. Com Supabase configurado,
+o catálogo e o painel usam as cores já salvas em `store_settings`. Para mudar
+uma loja existente, vá a **Aparência e loja → Cores da loja → Salvar configurações**.
+O painel mostra a nova paleta antes de salvar. Metadados/login continuam usando
+a identidade estática do JSON; mantenha ambos coerentes.
+
 Substitua as ilustrações neutras em `public/brand/` por imagens próprias e ajuste
 os caminhos no arquivo central. Arquivos locais de marca usam `/brand/...`.
 As galerias reais são enviadas pelo painel para o bucket `catalog`.
+O tema não altera os pixels das fotos ou da sua logomarca. As ilustrações
+iniciais são cinzas para não impor uma segunda identidade à paleta escolhida.
+
+Após atualizar esta correção, pare o servidor e execute `git pull --ff-only origin main`
+e `npm run dev`. Abra exatamente a URL **Local** impressa no terminal: se a porta
+3000 estiver ocupada, o Next.js pode usar 3001. Use `Ctrl+Shift+R` uma vez para
+renovar as ilustrações locais em cache. Não é necessário repetir o assistente
+nem executar SQL para aplicar a correção visual.
 
 Depois de editar manualmente nome/cores no JSON antes da instalação, execute
 `npm run personalize -- --name "Minha Loja"` para sincronizar o bloco inicial SQL.

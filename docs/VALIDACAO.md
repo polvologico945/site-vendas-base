@@ -17,9 +17,13 @@ fictícios e credenciais simuladas ficam em `tests/`, sem usuário padrão no SQ
 
 - Instalação limpa por `npm ci`: concluída.
 - Verificador do modelo, ESLint, TypeScript e formatação: aprovados.
-- 61 testes de lógica/SQL aprovados, incluindo catálogo vazio e personalização.
-- Build de produção e 20 cenários Chromium/Playwright aprovados.
+- 70 testes de lógica/SQL aprovados, incluindo catálogo vazio, personalização e contraste.
+- Build de produção e 23 cenários Chromium/Playwright aprovados.
 - JPEG/HEIC, cache entre telas, recuperação de acesso e navegação móvel exercitados.
+- Regressão de cores validada executando o personalizador com principal branca e
+  destaque vermelho antes do build de produção; identidade genérica restaurada
+  byte a byte depois. Cabeçalho, capa, rodapé, filtros, galeria, carrinho, painel,
+  login e recuperação foram conferidos por estilos computados no Chromium.
 
 ## Verificações
 
@@ -45,6 +49,7 @@ complementar, não um detector universal de dados sensíveis.
 - Instalação SQL vazia, reexecução, FKs, triggers, permissões e bancos legados.
 - Catálogo sem backend/sem produtos e contatos ausentes, sem URLs de exemplo ativas.
 - Assistente com nomes contendo apóstrofo, validação e preservação de loja existente.
+- Paletas claras/escuras, branco/vermelho, contraste e prévia das cores no painel.
 - Carrinho inválido/antigo, opções removidas e preço conferido antes do pedido.
 - Galerias sob demanda, capa com pausa e cache compartilhado entre telas.
 - Upload JPEG/HEIC real, conversão para WebP, duplicatas e falha parcial.

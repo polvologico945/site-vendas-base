@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { RecoveryRedirect } from "@/components/auth/recovery-redirect";
 import site from "@/config/site.json";
+import { themeStyle } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.name}` },
@@ -23,10 +24,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         style={
-          {
-            "--primary": site.primaryColor,
-            "--accent": site.accentColor,
-          } as React.CSSProperties
+          themeStyle(site.primaryColor, site.accentColor) as React.CSSProperties
         }
       >
         <RecoveryRedirect />
